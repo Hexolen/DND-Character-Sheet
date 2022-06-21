@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+    <head>
+        <meta  http-equiv="content-type" content="text/html; charset=utf-8">
+        <title>Hexed Studios</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" language="javascript"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="Data.js"></script>
+        <script>
+            function oyuncuBilgiBul()
+            {
+                var s = "";
+                for (var i = 0; i < players.length; i++)
+                {
+                    {
+                        s += oyuncuBilgi(players[i]);
+                    }
+                }
+                
+                document.getElementById("oyuncular").innerHTML = s; 
+            }
+
+            function createCharacter(c)
+            {
+                
+                var s = '<div class="row"><div class="col-sm-2 p-3">Character : '+ c.character +'</div>';
+                s += '<div class="col-sm-2 p-3">Class : '+ c.class +'</div>';
+                s += '<div class="col-sm-3 p-3">Level : '+ c.level +'</div></div>';
+                return s;
+            }
+
+            function oyuncuBilgi(user)
+            {
+                var s = '<div class="row">';
+                s += '<button type="button" class="custom-btn btn btn-outline-light text-dark col-sm-1 p-3 bg-light text-white container text-center" onclick="buttonImg('+ user.no +');"><img id="img_'+ user.no +'" src="https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/plus.png" class="rounded-circle" width="24" height="24"></button>';
+                s += '<div class="col-sm-11 p-3 bg-dark text-white">'+ user.alias +'</div>';
+                s += '</div>';
+                s += '<div class="row bg-dark text-white" id="info_'+user.no+'" style="display: none;">';
+                for(var i = 0; i < characters.length; i++)
+                {
+                    if(characters[i].pno == user.no)
+                        s += createCharacter(characters[i]);
+                }
+                s += '</div>';
+                    console.log(s);
+                
+                return s;
+            }
+
+            function buttonImg(userId)
+            {
+                var content = document.getElementById("img_" + userId);
+                var info = document.getElementById("info_" + userId);
+                if(content.src == 'https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/plus.png')
+                {
+                    content.src = "https://www.svgimages.com/svg-image/s8/minus-symbol.svg";
+                    info.style = "display: block-inline;"
+                }
+                else{
+                    content.src = "https://uxwing.com/wp-content/themes/uxwing/download/01-user_interface/plus.png";
+                    info.style = "display: none;"
+                }
+
+                
+            }
+        </script>
+        <style>
+            .custom-btn:hover
+            {
+                background-color: #006c74 !important;
+                outline-color: #20051c !important;
+                color: white !important;
+            }
+        </style> 
+    </head>
+    <body>
+        <div class="bg-image" style="background-image: url('https://i.pinimg.com/originals/4a/55/52/4a55526f0568117ab1807a87c13a6802.png'); height: 100vh;">
+            <h2 class="text-center text-light">Dungeons And Dragons Characters</h2>
+            <div id="oyuncular">
+                
+            </div>
+
+            <script>
+                oyuncuBilgiBul();
+            </script>
+        </div>
+    </body>
+</html>
